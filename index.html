@@ -162,8 +162,57 @@
   .ticket-top{padding:20px 22px 14px; border-bottom:1.5px dashed var(--line);}
   .ticket-top .order-no{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--tomato); font-weight:600; letter-spacing:1px;}
   .ticket-top h3{font-size:26px; margin-top:4px;}
-  .ticket-body{padding:16px 22px 22px; font-size:14.5px; color:var(--ink-soft); flex-grow:1; display:flex; flex-direction:column; justify-content:space-between;}
-  .ticket-body .postcode{font-family:'IBM Plex Mono',monospace; font-weight:600; color:var(--ink); display:block; margin-top:8px;}
+  .ticket-body{
+    padding:16px 22px 22px; 
+    font-size:14.5px; 
+    color:var(--ink-soft); 
+    flex-grow:1; 
+    display:flex; 
+    flex-direction:column; 
+    justify-space-between;
+  }
+  .ticket-body .address-text{
+    margin-bottom:16px;
+  }
+  .ticket-body .postcode{
+    font-family:'IBM Plex Mono',monospace; 
+    font-weight:600; 
+    color:var(--ink); 
+    display:block; 
+    margin-top:6px;
+  }
+
+  /* Map Button Link */
+  .map-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:10px 16px;
+    background:var(--paper);
+    color:var(--ink);
+    border:1.5px solid var(--ink);
+    border-radius:3px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    font-weight:600;
+    text-decoration:none;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    transition:background-color .2s ease, color .2s ease, border-color .2s ease;
+    margin-top:auto;
+  }
+  .map-btn:hover{
+    background:var(--sub-green);
+    color:#ffffff;
+    border-color:var(--sub-green-dark);
+  }
+  .map-btn svg{
+    width:15px;
+    height:15px;
+    fill:currentColor;
+  }
+
   .badge{
     position:absolute; top:16px; right:-34px; background:var(--sub-green); color:#fff;
     font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600; letter-spacing:1px;
@@ -339,7 +388,7 @@
     <div class="section-head">
       <div class="eyebrow">Where to find us</div>
       <h2>Our six locations</h2>
-      <p>Every Veloxa restaurant, restaurant number and all. Tap in your postcode when you're on the move — we're never far.</p>
+      <p>Every Veloxa restaurant, restaurant number and all. Tap on any location to get direct directions via Google Maps.</p>
     </div>
     <div class="counter">
 
@@ -352,8 +401,14 @@
           <h3>Guildhall Street, Lincoln</h3>
         </div>
         <div class="ticket-body">
-          7 Guildhall Street, Lincoln
-          <span class="postcode">LN1 1TT</span>
+          <div class="address-text">
+            7 Guildhall Street, Lincoln
+            <span class="postcode">LN1 1TT</span>
+          </div>
+          <a href="https://www.google.com/maps/search/?api=1&query=Subway+7+Guildhall+Street+Lincoln+LN1+1TT" target="_blank" rel="noopener noreferrer" class="map-btn">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Locate Store
+          </a>
         </div>
       </div>
 
@@ -366,8 +421,14 @@
           <h3>High Street, Lincoln</h3>
         </div>
         <div class="ticket-body">
-          342 High Street, Lincoln
-          <span class="postcode">LN5 7DQ</span>
+          <div class="address-text">
+            342 High Street, Lincoln
+            <span class="postcode">LN5 7DQ</span>
+          </div>
+          <a href="https://www.google.com/maps/search/?api=1&query=Subway+342+High+Street+Lincoln+LN5+7DQ" target="_blank" rel="noopener noreferrer" class="map-btn">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Locate Store
+          </a>
         </div>
       </div>
 
@@ -380,8 +441,14 @@
           <h3>Darwin Plaza, Lincoln</h3>
         </div>
         <div class="ticket-body">
-          Unit 1, Darwin Plaza, Wragby Road, Lincoln
-          <span class="postcode">LN2 4QA</span>
+          <div class="address-text">
+            Unit 1, Darwin Plaza, Wragby Road, Lincoln
+            <span class="postcode">LN2 4QA</span>
+          </div>
+          <a href="https://www.google.com/maps/search/?api=1&query=Subway+Unit+1+Darwin+Plaza+Wragby+Road+Lincoln+LN2+4QA" target="_blank" rel="noopener noreferrer" class="map-btn">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Locate Store
+          </a>
         </div>
       </div>
 
@@ -394,8 +461,14 @@
           <h3>Top Valley, Nottingham</h3>
         </div>
         <div class="ticket-body">
-          Unit 1, Top Valley Way, Tesco Extra Retail Park, Top Valley, Nottingham
-          <span class="postcode">NG5 9DD</span>
+          <div class="address-text">
+            Unit 1, Top Valley Way, Tesco Extra Retail Park, Top Valley, Nottingham
+            <span class="postcode">NG5 9DD</span>
+          </div>
+          <a href="https://www.google.com/maps/search/?api=1&query=Subway+Top+Valley+Way+Nottingham+NG5+9DD" target="_blank" rel="noopener noreferrer" class="map-btn">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Locate Store
+          </a>
         </div>
       </div>
 
@@ -408,8 +481,14 @@
           <h3>Apollo Retail Park, Nottingham</h3>
         </div>
         <div class="ticket-body">
-          Unit 1, Apollo Retail Park, Hucknall Lane, Nottingham
-          <span class="postcode">NG6 8AJ</span>
+          <div class="address-text">
+            Unit 1, Apollo Retail Park, Hucknall Lane, Nottingham
+            <span class="postcode">NG6 8AJ</span>
+          </div>
+          <a href="https://www.google.com/maps/search/?api=1&query=Subway+Apollo+Retail+Park+Nottingham+NG6+8AJ" target="_blank" rel="noopener noreferrer" class="map-btn">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Locate Store
+          </a>
         </div>
       </div>
 
@@ -423,8 +502,14 @@
           <h3>Marshalls Walk, Gainsborough</h3>
         </div>
         <div class="ticket-body">
-          2 Marshalls Walk, Gainsborough
-          <span class="postcode">DN21 2BP</span>
+          <div class="address-text">
+            2 Marshalls Walk, Gainsborough
+            <span class="postcode">DN21 2BP</span>
+          </div>
+          <a href="https://www.google.com/maps/search/?api=1&query=Subway+2+Marshalls+Walk+Gainsborough+DN21+2BP" target="_blank" rel="noopener noreferrer" class="map-btn">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Locate Store
+          </a>
         </div>
       </div>
 
