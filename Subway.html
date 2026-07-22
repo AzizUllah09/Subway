@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Veloxa — Locally owned Subway restaurants across Lincolnshire &amp; Nottingham</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EFE3C8;
+    --paper-light:#FBF6EA;
+    --ink:#241F16;
+    --ink-soft:#4a4130;
+    --tomato:#C8412A;
+    --basil:#4B6B3A;
+    --mustard:#E3A83B;
+    --sub-green:#058C42;
+    --sub-green-dark:#00542B;
+    --sub-yellow:#FFC72C;
+    --line: rgba(36,31,22,0.15);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important; scroll-behavior:auto !important;}
+  }
+  .wrap{max-width:1160px;margin:0 auto;padding:0 28px;}
+  a{color:inherit;}
+  h1,h2,h3{font-family:'Bebas Neue', sans-serif; letter-spacing:0.5px; font-weight:400;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+
+  /* NAV */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:var(--paper); border-bottom:1px solid var(--line);
+  }
+  nav{display:flex; align-items:center; justify-content:space-between; padding:18px 0;}
+  .logo{font-family:'Bebas Neue',sans-serif; font-size:28px; letter-spacing:2px;}
+  .logo span{color:var(--sub-green);}
+  .navlinks{display:flex; gap:32px; font-size:15px; font-weight:600;}
+  .navlinks a{text-decoration:none; position:relative; padding-bottom:4px;}
+  .navlinks a::after{
+    content:''; position:absolute; left:0; bottom:0; width:0; height:2px; background:var(--tomato);
+    transition:width .25s ease;
+  }
+  .navlinks a:hover::after{width:100%;}
+  .navtoggle{display:none;}
+
+  /* HERO */
+  .hero{padding:96px 0 80px; position:relative; overflow:hidden;}
+  .hero-grid{display:grid; grid-template-columns:1.2fr 0.8fr; gap:56px; align-items:center;}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:'IBM Plex Mono',monospace; font-size:13px; letter-spacing:2px;
+    text-transform:uppercase; color:var(--basil); margin-bottom:22px; font-weight:600;
+  }
+  .eyebrow::before{content:''; width:22px; height:2px; background:var(--tomato); display:inline-block;}
+  .hero h1{
+    font-size:clamp(48px, 7vw, 88px); line-height:0.95; margin-bottom:24px;
+  }
+  .hero h1 em{font-style:normal; color:var(--tomato);}
+  .hero p.lede{font-size:19px; max-width:480px; color:var(--ink-soft); margin-bottom:34px;}
+  .cta-row{display:flex; gap:16px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:14px 26px; border-radius:2px; font-weight:600; font-size:15px;
+    text-decoration:none; border:2px solid var(--ink); transition:transform .18s ease, background .18s ease, color .18s ease;
+  }
+  .btn-solid{background:var(--ink); color:var(--paper-light);}
+  .btn-solid:hover{background:var(--tomato); border-color:var(--tomato); transform:translateY(-2px);}
+  .btn-ghost{background:transparent; color:var(--ink);}
+  .btn-ghost:hover{background:var(--ink); color:var(--paper-light); transform:translateY(-2px);}
+  .btn-green{background:var(--sub-green); color:#fff; border-color:var(--sub-green-dark);}
+  .btn-green:hover{background:var(--sub-green-dark); border-color:var(--sub-green-dark); transform:translateY(-2px);}
+
+  /* Ticket stack graphic */
+  .ticket-stack{position:relative; height:380px;}
+  .sub-illustration{width:100%; max-width:420px; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);}
+  .stub{
+    position:absolute; width:200px; background:var(--paper-light);
+    border:1.5px dashed var(--ink); border-radius:6px;
+    padding:14px 16px; box-shadow:0 10px 24px rgba(36,31,22,0.18); z-index:3;
+  }
+  .stub .num{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--tomato); font-weight:600;}
+  .stub .place{font-family:'Bebas Neue',sans-serif; font-size:22px; margin-top:4px;}
+  .stub .sub{font-size:12px; color:var(--ink-soft); margin-top:2px;}
+  .stub1{top:0; left:0; transform:rotate(-6deg);}
+  .stub3{bottom:0; right:0; transform:rotate(3deg);}
+
+  /* Ingredient divider strip */
+  .ingredient-strip{width:100%; height:26px; display:block;}
+
+  /* SECTION generic */
+  section{padding:88px 0;}
+  .section-head{max-width:640px; margin-bottom:48px;}
+  .section-head .eyebrow{margin-bottom:14px;}
+  .section-head h2{font-size:clamp(36px,5vw,54px); line-height:0.98;}
+  .section-head p{color:var(--ink-soft); font-size:17px; margin-top:14px;}
+
+  /* ABOUT */
+  .about{background:var(--ink); color:var(--paper-light);}
+  .about .eyebrow{color:var(--mustard);}
+  .about .section-head p{color:#cfc6b2;}
+  .stat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(251,246,234,0.15); border:1px solid rgba(251,246,234,0.15); margin-top:20px;}
+  .stat{background:var(--ink); padding:32px 24px;}
+  .stat .num{font-family:'Bebas Neue',sans-serif; font-size:54px; color:var(--mustard); line-height:1;}
+  .stat .label{font-size:13px; text-transform:uppercase; letter-spacing:1px; margin-top:8px; color:#cfc6b2;}
+
+  /* LOCATIONS */
+  .locations .section-head .eyebrow{color:var(--tomato);}
+  .counter{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px;
+  }
+  .ticket{
+    background:var(--paper-light);
+    border:1.5px solid var(--ink);
+    border-radius:4px;
+    padding:0;
+    position:relative;
+    overflow:hidden;
+    opacity:0; transform:translateY(18px);
+    animation:rise .6s ease forwards;
+  }
+  .ticket:nth-child(1){animation-delay:.02s}
+  .ticket:nth-child(2){animation-delay:.08s}
+  .ticket:nth-child(3){animation-delay:.14s}
+  .ticket:nth-child(4){animation-delay:.20s}
+  .ticket:nth-child(5){animation-delay:.26s}
+  .ticket:nth-child(6){animation-delay:.32s}
+  @keyframes rise{to{opacity:1; transform:translateY(0);}}
+  .ticket-top{padding:20px 22px 16px; border-bottom:1.5px dashed var(--line);}
+  .ticket-top .order-no{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--tomato); font-weight:600; letter-spacing:1px;}
+  .ticket-top h3{font-size:26px; margin-top:6px;}
+  .ticket-body{padding:16px 22px 22px; font-size:14.5px; color:var(--ink-soft);}
+  .ticket-body .postcode{font-family:'IBM Plex Mono',monospace; font-weight:600; color:var(--ink); display:block; margin-top:6px;}
+  .badge{
+    position:absolute; top:16px; right:-34px; background:var(--sub-green); color:#fff;
+    font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600; letter-spacing:1px;
+    padding:5px 40px; transform:rotate(35deg);
+  }
+  .ticket:hover{transform:translateY(-4px); box-shadow:0 14px 28px rgba(36,31,22,0.16);}
+  .ticket{transition:transform .25s ease, box-shadow .25s ease;}
+
+  /* OWNER */
+  .owner{background:var(--paper-light); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .owner-grid{display:grid; grid-template-columns:280px 1fr; gap:48px; align-items:center;}
+  .owner-photo{
+    width:100%; aspect-ratio:1/1; border-radius:50%;
+    border:3px solid var(--ink); background:var(--paper);
+    display:flex; align-items:center; justify-content:center;
+    text-align:center; font-size:13px; color:var(--ink-soft); padding:20px;
+    font-family:'IBM Plex Mono',monospace;
+  }
+  .owner h2{font-size:clamp(32px,4vw,44px);}
+  .owner .role{font-family:'IBM Plex Mono',monospace; color:var(--tomato); font-size:13px; letter-spacing:1px; text-transform:uppercase; margin:8px 0 18px;}
+  .owner p{color:var(--ink-soft); max-width:560px;}
+
+  /* CONTACT / FOOTER */
+  footer{background:var(--ink); color:var(--paper-light); padding:64px 0 28px;}
+  .foot-grid{display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:40px; padding-bottom:40px; border-bottom:1px solid rgba(251,246,234,0.15);}
+  footer h3{font-size:26px; margin-bottom:12px;}
+  footer p{color:#cfc6b2; font-size:14.5px; max-width:340px;}
+  .foot-col h4{font-family:'IBM Plex Mono',monospace; font-size:12px; text-transform:uppercase; letter-spacing:1.5px; color:var(--mustard); margin-bottom:14px;}
+  .foot-col a{display:block; color:#cfc6b2; text-decoration:none; font-size:14.5px; margin-bottom:10px;}
+  .foot-col a:hover{color:var(--paper-light);}
+  .foot-bottom{display:flex; justify-content:space-between; padding-top:22px; font-size:13px; color:#9a917b; flex-wrap:wrap; gap:10px;}
+
+  @media (max-width: 860px){
+    .hero-grid{grid-template-columns:1fr;}
+    .ticket-stack{height:260px; margin-top:20px;}
+    .stub{width:190px; padding:12px 14px;}
+    .stat-grid{grid-template-columns:repeat(2,1fr);}
+    .owner-grid{grid-template-columns:1fr; text-align:center;}
+    .owner-photo{width:180px; margin:0 auto;}
+    .foot-grid{grid-template-columns:1fr; gap:30px;}
+    .navlinks{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <div class="logo">VELOXA<span>.</span></div>
+      <div class="navlinks">
+        <a href="#locations">Locations</a>
+        <a href="#about">About</a>
+        <a href="#owner">Owner</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a href="#locations" class="btn btn-green" style="padding:10px 18px; font-size:14px;">Find a store</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Veloxa Ltd &middot; veloxa.co.uk</div>
+      <h1>Six counters.<br>One <em>standard.</em></h1>
+      <p class="lede">Veloxa owns and runs six Subway restaurants across Lincoln, Gainsborough and Nottingham — every one built, staffed and stocked to the same standard, every day.</p>
+      <div class="cta-row">
+        <a href="#locations" class="btn btn-solid">See all locations</a>
+        <a href="#contact" class="btn btn-ghost">Get in touch</a>
+      </div>
+    </div>
+    <div class="ticket-stack">
+      <svg class="sub-illustration" viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- bottom bread -->
+        <path d="M25 175 Q25 215 70 218 L350 218 Q395 215 395 175 L395 165 L25 165 Z" fill="#E8B968" stroke="#241F16" stroke-width="3"/>
+        <!-- lettuce -->
+        <path d="M20 168 Q45 145 70 168 Q95 142 120 168 Q145 144 170 168 Q195 143 220 168 Q245 145 270 168 Q295 142 320 168 Q350 145 400 168 L400 178 L20 178 Z" fill="var(--sub-green)" stroke="#241F16" stroke-width="3"/>
+        <!-- tomato slices -->
+        <circle cx="110" cy="150" r="17" fill="var(--tomato)" stroke="#241F16" stroke-width="2.5"/>
+        <circle cx="110" cy="150" r="7" fill="#e8b968" opacity="0.85"/>
+        <circle cx="230" cy="146" r="17" fill="var(--tomato)" stroke="#241F16" stroke-width="2.5"/>
+        <circle cx="230" cy="146" r="7" fill="#e8b968" opacity="0.85"/>
+        <circle cx="320" cy="152" r="15" fill="var(--tomato)" stroke="#241F16" stroke-width="2.5"/>
+        <!-- cheese zigzag -->
+        <path d="M20 140 L55 155 L85 138 L120 155 L150 138 L185 155 L215 138 L250 155 L280 138 L315 155 L350 138 L400 155 L400 145 L20 130 Z" fill="var(--sub-yellow)" stroke="#241F16" stroke-width="2.5"/>
+        <!-- top bread -->
+        <path d="M25 130 Q30 55 210 45 Q390 55 395 130 Z" fill="#EAC27E" stroke="#241F16" stroke-width="3"/>
+        <!-- sesame seeds -->
+        <ellipse cx="90" cy="90" rx="5" ry="3" fill="#241F16" opacity="0.5" transform="rotate(-20 90 90)"/>
+        <ellipse cx="150" cy="70" rx="5" ry="3" fill="#241F16" opacity="0.5" transform="rotate(15 150 70)"/>
+        <ellipse cx="210" cy="62" rx="5" ry="3" fill="#241F16" opacity="0.5" transform="rotate(-10 210 62)"/>
+        <ellipse cx="270" cy="72" rx="5" ry="3" fill="#241F16" opacity="0.5" transform="rotate(20 270 72)"/>
+        <ellipse cx="320" cy="92" rx="5" ry="3" fill="#241F16" opacity="0.5" transform="rotate(-15 320 92)"/>
+      </svg>
+      <div class="stub stub1">
+        <div class="num">ORDER No. 34507</div>
+        <div class="place">Lincoln</div>
+        <div class="sub">Guildhall Street</div>
+      </div>
+      <div class="stub stub3">
+        <div class="num">ORDER No. 75890</div>
+        <div class="place">Gainsborough</div>
+        <div class="sub">Marshalls Walk &middot; New</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<svg class="ingredient-strip" viewBox="0 0 1160 26" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <rect width="1160" height="26" fill="var(--sub-yellow)"/>
+  <path d="M0 8 Q29 0 58 8 Q87 16 116 8 Q145 0 174 8 Q203 16 232 8 Q261 0 290 8 Q319 16 348 8 Q377 0 406 8 Q435 16 464 8 Q493 0 522 8 Q551 16 580 8 Q609 0 638 8 Q667 16 696 8 Q725 0 754 8 Q783 16 812 8 Q841 0 870 8 Q899 16 928 8 Q957 0 986 8 Q1015 16 1044 8 Q1073 0 1102 8 Q1131 16 1160 8 L1160 26 L0 26 Z" fill="var(--sub-green)"/>
+</svg>
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">The business</div>
+      <h2>Locally owned. Franchise run.</h2>
+      <p>Veloxa is a multi-site Subway franchisee operating across Lincolnshire and Nottinghamshire. Each restaurant is run to the same recipe: fresh ingredients prepared to order, fast service, and a team that knows the regulars by name.</p>
+    </div>
+    <div class="stat-grid">
+      <div class="stat"><div class="num" style="color:var(--sub-yellow);">06</div><div class="label">Restaurants trading</div></div>
+      <div class="stat"><div class="num" style="color:var(--sub-green);">02</div><div class="label">Counties covered</div></div>
+      <div class="stat"><div class="num" style="color:var(--sub-yellow);">03</div><div class="label">Towns &amp; cities</div></div>
+      <div class="stat"><div class="num" style="color:var(--sub-green);">01</div><div class="label">New store opening</div></div>
+    </div>
+  </div>
+</section>
+
+<svg class="ingredient-strip" viewBox="0 0 1160 26" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <rect width="1160" height="26" fill="var(--paper)"/>
+  <path d="M0 18 Q29 26 58 18 Q87 10 116 18 Q145 26 174 18 Q203 10 232 18 Q261 26 290 18 Q319 10 348 18 Q377 26 406 18 Q435 10 464 18 Q493 26 522 18 Q551 10 580 18 Q609 26 638 18 Q667 10 696 18 Q725 26 754 18 Q783 10 812 18 Q841 26 870 18 Q899 10 928 18 Q957 26 986 18 Q1015 10 1044 18 Q1073 26 1102 18 Q1131 10 1160 18 L1160 0 L0 0 Z" fill="var(--sub-yellow)"/>
+</svg>
+<section class="locations" id="locations">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Where to find us</div>
+      <h2>Our six locations</h2>
+      <p>Every Veloxa restaurant, order number and all. Tap in your postcode when you're on the move — we're never far.</p>
+    </div>
+    <div class="counter">
+
+      <div class="ticket">
+        <div class="ticket-top">
+          <div class="order-no">STORE No. 34507</div>
+          <h3>Guildhall Street, Lincoln</h3>
+        </div>
+        <div class="ticket-body">
+          7 Guildhall Street, Lincoln
+          <span class="postcode">LN1 1TT</span>
+        </div>
+      </div>
+
+      <div class="ticket">
+        <div class="ticket-top">
+          <div class="order-no">STORE No. 26453</div>
+          <h3>High Street, Lincoln</h3>
+        </div>
+        <div class="ticket-body">
+          342 High Street, Lincoln
+          <span class="postcode">LN5 7DQ</span>
+        </div>
+      </div>
+
+      <div class="ticket">
+        <div class="ticket-top">
+          <div class="order-no">STORE No. 64970</div>
+          <h3>Darwin Plaza, Lincoln</h3>
+        </div>
+        <div class="ticket-body">
+          Unit 1, Darwin Plaza, Wragby Road, Lincoln
+          <span class="postcode">LN2 4QA</span>
+        </div>
+      </div>
+
+      <div class="ticket">
+        <div class="ticket-top">
+          <div class="order-no">STORE No. 43361</div>
+          <h3>Top Valley, Nottingham</h3>
+        </div>
+        <div class="ticket-body">
+          Unit 1, Top Valley Way, Tesco Extra Retail Park, Top Valley, Nottingham
+          <span class="postcode">NG5 9DD</span>
+        </div>
+      </div>
+
+      <div class="ticket">
+        <div class="ticket-top">
+          <div class="order-no">STORE No. 72832</div>
+          <h3>Apollo Retail Park, Nottingham</h3>
+        </div>
+        <div class="ticket-body">
+          Unit 1, Apollo Retail Park, Hucknall Lane, Nottingham
+          <span class="postcode">NG6 8AJ</span>
+        </div>
+      </div>
+
+      <div class="ticket">
+        <span class="badge">New</span>
+        <div class="ticket-top">
+          <div class="order-no">STORE No. 75890</div>
+          <h3>Marshalls Walk, Gainsborough</h3>
+        </div>
+        <div class="ticket-body">
+          2 Marshalls Walk, Gainsborough
+          <span class="postcode">DN21 2BP</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<svg class="ingredient-strip" viewBox="0 0 1160 26" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <rect width="1160" height="26" fill="var(--sub-green)"/>
+  <path d="M0 8 Q29 0 58 8 Q87 16 116 8 Q145 0 174 8 Q203 16 232 8 Q261 0 290 8 Q319 16 348 8 Q377 0 406 8 Q435 16 464 8 Q493 0 522 8 Q551 16 580 8 Q609 0 638 8 Q667 16 696 8 Q725 0 754 8 Q783 16 812 8 Q841 0 870 8 Q899 16 928 8 Q957 0 986 8 Q1015 16 1044 8 Q1073 0 1102 8 Q1131 16 1160 8 L1160 26 L0 26 Z" fill="var(--paper-light)"/>
+</svg>
+<section class="owner" id="owner">
+  <div class="wrap owner-grid">
+    <div class="owner-photo">
+      PHOTO<br>PLACEHOLDER<br>— add Matt's<br>headshot here —
+    </div>
+    <div>
+      <div class="eyebrow" style="color:var(--basil);">Leadership</div>
+      <h2>Matt King</h2>
+      <div class="role">Owner, Veloxa</div>
+      <p>Matt owns and oversees all six Veloxa restaurants, working closely with each store's team to keep service, quality and standards consistent across every location in Lincolnshire and Nottinghamshire.</p>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h3>Let's talk.</h3>
+        <p>For franchise enquiries, supplier contact or general questions about any Veloxa restaurant, reach out below.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <a href="#about">About Veloxa</a>
+        <a href="#owner">Ownership</a>
+        <a href="#locations">Locations</a>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <a href="mailto:hello@veloxa.co.uk">hello@veloxa.co.uk</a>
+        <a href="#locations">Store addresses</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; 2026 Veloxa Ltd. Subway&reg; restaurants operated under franchise.</span>
+      <span>veloxa.co.uk</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
