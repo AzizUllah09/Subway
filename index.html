@@ -53,7 +53,6 @@
     transition:width .25s ease;
   }
   .navlinks a:hover::after{width:100%;}
-  .navtoggle{display:none;}
 
   /* HERO */
   .hero{padding:96px 0 80px; position:relative; overflow:hidden;}
@@ -119,17 +118,19 @@
   /* LOCATIONS */
   .locations .section-head .eyebrow{color:var(--tomato);}
   .counter{
-    display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px;
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:28px;
   }
   .ticket{
     background:var(--paper-light);
     border:1.5px solid var(--ink);
-    border-radius:4px;
-    padding:0;
+    border-radius:6px;
     position:relative;
     overflow:hidden;
+    display:flex;
+    flex-direction:column;
     opacity:0; transform:translateY(18px);
     animation:rise .6s ease forwards;
+    transition:transform .25s ease, box-shadow .25s ease;
   }
   .ticket:nth-child(1){animation-delay:.02s}
   .ticket:nth-child(2){animation-delay:.08s}
@@ -138,18 +139,37 @@
   .ticket:nth-child(5){animation-delay:.26s}
   .ticket:nth-child(6){animation-delay:.32s}
   @keyframes rise{to{opacity:1; transform:translateY(0);}}
-  .ticket-top{padding:20px 22px 16px; border-bottom:1.5px dashed var(--line);}
+  
+  /* Ticket Image Styles */
+  .ticket-image{
+    width:100%;
+    height:190px;
+    overflow:hidden;
+    position:relative;
+    background:var(--paper);
+    border-bottom:1.5px solid var(--ink);
+  }
+  .ticket-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:transform .35s ease;
+  }
+  .ticket:hover .ticket-image img{
+    transform:scale(1.05);
+  }
+
+  .ticket-top{padding:20px 22px 14px; border-bottom:1.5px dashed var(--line);}
   .ticket-top .order-no{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--tomato); font-weight:600; letter-spacing:1px;}
-  .ticket-top h3{font-size:26px; margin-top:6px;}
-  .ticket-body{padding:16px 22px 22px; font-size:14.5px; color:var(--ink-soft);}
-  .ticket-body .postcode{font-family:'IBM Plex Mono',monospace; font-weight:600; color:var(--ink); display:block; margin-top:6px;}
+  .ticket-top h3{font-size:26px; margin-top:4px;}
+  .ticket-body{padding:16px 22px 22px; font-size:14.5px; color:var(--ink-soft); flex-grow:1; display:flex; flex-direction:column; justify-content:space-between;}
+  .ticket-body .postcode{font-family:'IBM Plex Mono',monospace; font-weight:600; color:var(--ink); display:block; margin-top:8px;}
   .badge{
     position:absolute; top:16px; right:-34px; background:var(--sub-green); color:#fff;
     font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600; letter-spacing:1px;
-    padding:5px 40px; transform:rotate(35deg);
+    padding:5px 40px; transform:rotate(35deg); z-index:5;
   }
   .ticket:hover{transform:translateY(-4px); box-shadow:0 14px 28px rgba(36,31,22,0.16);}
-  .ticket{transition:transform .25s ease, box-shadow .25s ease;}
 
   /* OWNER */
   .owner{background:var(--paper-light); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
@@ -324,6 +344,9 @@
     <div class="counter">
 
       <div class="ticket">
+        <div class="ticket-image">
+          <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80" alt="Subway Guildhall Street Lincoln Storefront">
+        </div>
         <div class="ticket-top">
           <div class="order-no">RESTAURANT No. 34507</div>
           <h3>Guildhall Street, Lincoln</h3>
@@ -335,6 +358,9 @@
       </div>
 
       <div class="ticket">
+        <div class="ticket-image">
+          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80" alt="Subway High Street Lincoln Storefront">
+        </div>
         <div class="ticket-top">
           <div class="order-no">RESTAURANT No. 26453</div>
           <h3>High Street, Lincoln</h3>
@@ -346,6 +372,9 @@
       </div>
 
       <div class="ticket">
+        <div class="ticket-image">
+          <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=800&q=80" alt="Subway Darwin Plaza Lincoln Storefront">
+        </div>
         <div class="ticket-top">
           <div class="order-no">RESTAURANT No. 64970</div>
           <h3>Darwin Plaza, Lincoln</h3>
@@ -357,6 +386,9 @@
       </div>
 
       <div class="ticket">
+        <div class="ticket-image">
+          <img src="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?auto=format&fit=crop&w=800&q=80" alt="Subway Top Valley Nottingham Storefront">
+        </div>
         <div class="ticket-top">
           <div class="order-no">RESTAURANT No. 43361</div>
           <h3>Top Valley, Nottingham</h3>
@@ -368,6 +400,9 @@
       </div>
 
       <div class="ticket">
+        <div class="ticket-image">
+          <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=800&q=80" alt="Subway Apollo Retail Park Nottingham Storefront">
+        </div>
         <div class="ticket-top">
           <div class="order-no">RESTAURANT No. 72832</div>
           <h3>Apollo Retail Park, Nottingham</h3>
@@ -380,6 +415,9 @@
 
       <div class="ticket">
         <span class="badge">New</span>
+        <div class="ticket-image">
+          <img src="https://images.unsplash.com/photo-1537047902294-62a40c20a6ae?auto=format&fit=crop&w=800&q=80" alt="Subway Marshalls Walk Gainsborough Storefront">
+        </div>
         <div class="ticket-top">
           <div class="order-no">RESTAURANT No. 75890</div>
           <h3>Marshalls Walk, Gainsborough</h3>
